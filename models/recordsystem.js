@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Recordsystem extends Model {
     /**
@@ -10,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Pasajero.belongsTo(models.User, {
+      Recordsystem.belongsTo(models.User, {
         foreignKey: 'userId'
       });
     }
