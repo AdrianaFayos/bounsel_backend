@@ -10,13 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Pasajero.belongsTo(models.User, {
+        foreignKey: 'userId'
+      });
     }
   };
   Recordsystem.init({
     userId: DataTypes.INTEGER,
-    startrecording: DataTypes.DATE,
-    stoprecording: DataTypes.DATE
+    secondsRecording: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Recordsystem',

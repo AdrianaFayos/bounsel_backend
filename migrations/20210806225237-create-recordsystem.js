@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'Users',
+          key:'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      secondsRecording: {
         type: Sequelize.INTEGER
-      },
-      startrecording: {
-        type: Sequelize.DATE
-      },
-      stoprecording: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
