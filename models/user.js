@@ -16,13 +16,53 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    name: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type : DataTypes.STRING,
+      validate: {
+        isAlpha: {
+          msg: "The name can only contain letters",
+        },
+        len: {
+          args: [2, 255],
+          msg: "The name must be at least two characters long",
+        },
+      },
+    }, 
+
+    lastname: {
+      type : DataTypes.STRING,
+      validate: {
+        isAlpha: {
+          msg: "The name can only contain letters",
+        },
+        len: {
+          args: [2, 255],
+          msg: "The name must be at least two characters long",
+        },
+      },
+    }, 
+
+    email: {
+      type : DataTypes.STRING,
+      validate: {
+        isEmail: {
+          msg: "Enter a valid email",
+        },
+      }  
+    },
+    password: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'User',
   });
+  
+  User.prototype.toJSON =  function () {
+    var values = Object.assign({}, this.get());
+  
+    delete values.password;
+    return values;
+  }
+
   return User;
 };
