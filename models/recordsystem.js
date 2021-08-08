@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   Recordsystem.init({
     userId: DataTypes.INTEGER,
-    secondsRecording: DataTypes.INTEGER,
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
+    
   }, {
     sequelize,
     modelName: 'Recordsystem',

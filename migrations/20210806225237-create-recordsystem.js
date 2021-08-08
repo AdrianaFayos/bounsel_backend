@@ -17,8 +17,13 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      secondsRecording: {
-        type: Sequelize.INTEGER
+      startDate: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      endDate: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

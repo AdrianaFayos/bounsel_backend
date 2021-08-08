@@ -17,10 +17,13 @@ class Time {
         );
     }
 
-    async findByDate(userId,date) {
+    async findByDate(userId,startDate,endDate) {
         return Recordsystem.findAll(
-            {where: {userId: userId,
-            createdAt: date}}
+            {where: {
+            userId: userId,
+            startDate: startDate,
+            endDate:endDate
+            }}
         );
     }
 

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const recordsystemController = require('../controllers/recordsystemController');
-// const authenticate = require('../middleware/authenticate');
+const authenticate = require('../middleware/authenticate');
 
 // GET All Records
 router.get('/', async(req, res) => {
@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 });
 
 // Record by User
-router.post('/byuser',  async(req, res) => {
+router.post('/byuser', authenticate,  async(req, res) => {
 
     try {
         const id = req.body.userId;
@@ -30,12 +30,13 @@ router.post('/byuser',  async(req, res) => {
 });
 
 // Record by Date
-router.post('/bydate',  async(req, res) => {
+router.post('/bydate', authenticate, async(req, res) => {
 
     try {
         const id = req.body.userId;
-        const date = req.body.date;
-        res.json(await recordsystemController.findByDate(id,date))
+        const startDate = req.body.startDate;
+        const endDate = req.body.endDate;
+        res.json(await recordsystemController.findByDate(id,startDate,endDate))
     } catch (err) {
         return res.status(500).json({
             message: err.message
@@ -44,7 +45,7 @@ router.post('/bydate',  async(req, res) => {
 
 });
 
-// Create new user
+// Create new record
 router.post('/', async(req, res) => {
 
     try {

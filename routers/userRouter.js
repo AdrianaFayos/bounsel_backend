@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const userController = require('../controllers/userController');
-// const authenticate = require('../middleware/authenticate');
+const authenticate = require('../middleware/authenticate');
 
 // GET All Users
 router.get('/', async(req, res) => {
@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 });
 
 // GET user profile
-router.post('/profile',  async(req, res) => {
+router.post('/profile', authenticate, async(req, res) => {
 
     try {
         const id = req.body.userId;
@@ -45,7 +45,7 @@ router.post('/', async(req, res) => {
 });
 
 // UPDATE User
-router.put('/', async (req,res) => {
+router.put('/',authenticate, async (req,res) => {
 
     try{
         const bodyData = req.body;
@@ -59,7 +59,7 @@ router.put('/', async (req,res) => {
 })
 
 // Delete user 
-router.delete('/', async (req, res) => {
+router.delete('/', authenticate, async (req, res) => {
     try {
         const bodyData = req.body;
         res.json(await userController.deleteUser(bodyData))
